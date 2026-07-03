@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#111827" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-title" content="Strength Log" />
+  <title>Strength Log</title>
+  <link rel="manifest" href="manifest.json" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app">
+    <header class="header">
+      <div>
+        <p class="eyebrow">Daily Strength</p>
+        <h1>Strength Log</h1>
+      </div>
+      <button id="exportBtn" class="top-action" type="button">Export</button>
+    </header>
+
+    <main>
+      <section id="home" class="screen active" aria-label="Home">
+        <section class="hero-card">
+          <p id="todayDate" class="muted">Today</p>
+          <div id="todayTotal" class="main-number">0</div>
+          <p class="label">squats completed</p>
+          <div class="progress-track" aria-label="Daily goal progress">
+            <div id="dailyProgress" class="progress-fill"></div>
+          </div>
+          <p id="dailyGoalText" class="muted">Goal: 0 / 50</p>
+        </section>
+
+        <section class="card">
+          <h2>Add squats</h2>
+          <div id="quickGrid" class="quick-grid"></div>
+          <div class="action-grid">
+            <button id="customBtn" class="secondary" type="button">Custom set</button>
+            <button id="repeatBtn" class="secondary" type="button">Repeat last</button>
+            <button id="undoBtn" class="ghost" type="button">Undo</button>
+            <button id="clearTodayBtn" class="ghost danger" type="button">Clear today</button>
+          </div>
+        </section>
+
+        <section class="card">
+          <div class="section-head">
+            <h2>Other strength</h2>
+            <div class="toggle-row" aria-label="Other strength today">
+              <button id="otherYes" class="pill" type="button">Yes</button>
+              <button id="otherNo" class="pill" type="button">No</button>
+            </div>
+          </div>
+          <div id="exercisePanel" class="hidden">
+            <p class="muted small prompt">Tap any exercise you did today.</p>
+            <div id="exerciseChips" class="chip-grid"></div>
+            <label class="field-label" for="exerciseNotes">Notes</label>
+            <textarea id="exerciseNotes" rows="3" placeholder="Examples: 2 x 30-sec planks, 3 x 15 glute bridges, 2 x 12 deadlifts"></textarea>
+          </div>
+          <p id="exerciseSummary" class="muted small"></p>
+        </section>
+      </section>
+
+      <section id="progress" class="screen" aria-label="Progress">
+        <section class="stats-grid">
+          <div class="stat card"><span id="streak">0</span><small>day streak</small></div>
+          <div class="stat card"><span id="weekTotal">0</span><small>last 7 days</small></div>
+          <div class="stat card"><span id="monthTotal">0</span><small>last 30 days</small></div>
+          <div class="stat card"><span id="bestDay">0</span><small>best day</small></div>
+        </section>
+
+        <section class="card">
+          <h2>Last 14 days</h2>
+          <div id="chart" class="chart"></div>
+        </section>
+
+        <section class="card">
+          <h2>Consistency</h2>
+          <p id="consistencyText" class="big-line">0 workout days in the last 7 days</p>
+          <div class="goal-grid">
+            <div><strong id="weeklyGoalText">0%</strong><span>weekly goal</span></div>
+            <div><strong id="monthlyGoalText">0%</strong><span>monthly goal</span></div>
+          </div>
+        </section>
+      </section>
+
+      <section id="history" class="screen" aria-label="History">
+        <section class="card">
+          <h2>History</h2>
+          <div id="historyList"></div>
+        </section>
+      </section>
+
+      <section id="goals" class="screen" aria-label="Goals">
+        <section class="card">
+          <h2>Goals</h2>
+          <label>Daily squat goal<input id="dailyGoal" type="number" min="1" inputmode="numeric" /></label>
+          <label>Weekly squat goal<input id="weeklyGoal" type="number" min="1" inputmode="numeric" /></label>
+          <label>Monthly squat goal<input id="monthlyGoal" type="number" min="1" inputmode="numeric" /></label>
+          <button id="saveGoals" class="primary full" type="button">Save goals</button>
+        </section>
+
+        <section class="card">
+          <h2>Data</h2>
+          <p class="muted small">Your data is stored locally on this device/browser. Export a CSV periodically if you want a backup.</p>
+          <button id="resetBtn" class="ghost danger full" type="button">Reset all data</button>
+        </section>
+      </section>
+    </main>
+
+    <nav class="bottom-nav" aria-label="Main navigation">
+      <button class="nav-btn active" data-screen="home" type="button">Home</button>
+      <button class="nav-btn" data-screen="progress" type="button">Progress</button>
+      <button class="nav-btn" data-screen="history" type="button">History</button>
+      <button class="nav-btn" data-screen="goals" type="button">Goals</button>
+    </nav>
+  </div>
+
+  <dialog id="customDialog">
+    <h2>Add custom set</h2>
+    <select id="customSelect"></select>
+    <div class="dialog-actions">
+      <button id="cancelCustom" class="ghost" type="button">Cancel</button>
+      <button id="addCustom" class="primary" type="button">Add</button>
+    </div>
+  </dialog>
+
+  <dialog id="editDialog">
+    <h2 id="editTitle">Edit day</h2>
+    <label>Squat total<input id="editSquats" type="number" min="0" inputmode="numeric" /></label>
+    <div class="edit-chips" id="editChips"></div>
+    <label>Other strength notes<textarea id="editNotes" rows="3"></textarea></label>
+    <div class="dialog-actions">
+      <button id="cancelEdit" class="ghost" type="button">Cancel</button>
+      <button id="saveEdit" class="primary" type="button">Save</button>
+    </div>
+  </dialog>
+
+  <script src="app.js"></script>
+</body>
+</html>
