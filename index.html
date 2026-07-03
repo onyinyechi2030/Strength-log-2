@@ -3,9 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <meta name="theme-color" content="#111827" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-title" content="Strength Log" />
+  <meta name="theme-color" content="#0f172a" />
   <title>Strength Log</title>
   <link rel="manifest" href="manifest.json" />
   <link rel="stylesheet" href="styles.css" />
@@ -21,14 +19,12 @@
     </header>
 
     <main>
-      <section id="home" class="screen active" aria-label="Home">
+      <section id="home" class="screen active">
         <section class="hero-card">
           <p id="todayDate" class="muted">Today</p>
           <div id="todayTotal" class="main-number">0</div>
           <p class="label">squats completed</p>
-          <div class="progress-track" aria-label="Daily goal progress">
-            <div id="dailyProgress" class="progress-fill"></div>
-          </div>
+          <div class="progress-track"><div id="dailyProgress" class="progress-fill"></div></div>
           <p id="dailyGoalText" class="muted">Goal: 0 / 50</p>
         </section>
 
@@ -46,7 +42,7 @@
         <section class="card">
           <div class="section-head">
             <h2>Other strength</h2>
-            <div class="toggle-row" aria-label="Other strength today">
+            <div class="toggle-row">
               <button id="otherYes" class="pill" type="button">Yes</button>
               <button id="otherNo" class="pill" type="button">No</button>
             </div>
@@ -55,43 +51,37 @@
             <p class="muted small prompt">Tap any exercise you did today.</p>
             <div id="exerciseChips" class="chip-grid"></div>
             <label class="field-label" for="exerciseNotes">Notes</label>
-            <textarea id="exerciseNotes" rows="3" placeholder="Examples: 2 x 30-sec planks, 3 x 15 glute bridges, 2 x 12 deadlifts"></textarea>
+            <textarea id="exerciseNotes" rows="3" placeholder="e.g., 2 x 30-sec planks, 3 x 15 glute bridges"></textarea>
           </div>
           <p id="exerciseSummary" class="muted small"></p>
         </section>
       </section>
 
-      <section id="progress" class="screen" aria-label="Progress">
+      <section id="progress" class="screen">
         <section class="stats-grid">
           <div class="stat card"><span id="streak">0</span><small>day streak</small></div>
           <div class="stat card"><span id="weekTotal">0</span><small>last 7 days</small></div>
           <div class="stat card"><span id="monthTotal">0</span><small>last 30 days</small></div>
           <div class="stat card"><span id="bestDay">0</span><small>best day</small></div>
         </section>
-
         <section class="card">
           <h2>Last 14 days</h2>
           <div id="chart" class="chart"></div>
         </section>
-
         <section class="card">
           <h2>Consistency</h2>
           <p id="consistencyText" class="big-line">0 workout days in the last 7 days</p>
-          <div class="goal-grid">
-            <div><strong id="weeklyGoalText">0%</strong><span>weekly goal</span></div>
-            <div><strong id="monthlyGoalText">0%</strong><span>monthly goal</span></div>
-          </div>
         </section>
       </section>
 
-      <section id="history" class="screen" aria-label="History">
+      <section id="history" class="screen">
         <section class="card">
           <h2>History</h2>
           <div id="historyList"></div>
         </section>
       </section>
 
-      <section id="goals" class="screen" aria-label="Goals">
+      <section id="goals" class="screen">
         <section class="card">
           <h2>Goals</h2>
           <label>Daily squat goal<input id="dailyGoal" type="number" min="1" inputmode="numeric" /></label>
@@ -99,16 +89,15 @@
           <label>Monthly squat goal<input id="monthlyGoal" type="number" min="1" inputmode="numeric" /></label>
           <button id="saveGoals" class="primary full" type="button">Save goals</button>
         </section>
-
         <section class="card">
           <h2>Data</h2>
-          <p class="muted small">Your data is stored locally on this device/browser. Export a CSV periodically if you want a backup.</p>
+          <p class="muted small">Your data is stored locally on this device/browser.</p>
           <button id="resetBtn" class="ghost danger full" type="button">Reset all data</button>
         </section>
       </section>
     </main>
 
-    <nav class="bottom-nav" aria-label="Main navigation">
+    <nav class="bottom-nav">
       <button class="nav-btn active" data-screen="home" type="button">Home</button>
       <button class="nav-btn" data-screen="progress" type="button">Progress</button>
       <button class="nav-btn" data-screen="history" type="button">History</button>
@@ -128,7 +117,7 @@
   <dialog id="editDialog">
     <h2 id="editTitle">Edit day</h2>
     <label>Squat total<input id="editSquats" type="number" min="0" inputmode="numeric" /></label>
-    <div class="edit-chips" id="editChips"></div>
+    <div id="editChips" class="chip-grid"></div>
     <label>Other strength notes<textarea id="editNotes" rows="3"></textarea></label>
     <div class="dialog-actions">
       <button id="cancelEdit" class="ghost" type="button">Cancel</button>
